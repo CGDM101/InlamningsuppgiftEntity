@@ -19,9 +19,14 @@ namespace InlamningsuppgiftEntity
             optionsBuilder.UseSqlServer($@"Server=(localdb)\mssqllocaldb;Database={DatabaseName};Trusted_Connection=True");
         }
 
-        // OmMoelCreeating?
+        // Seeded data:
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Person>().HasData(new Person { Id = 1, Name = "Dave", LastName = "Gahan", Mor = 2, Far = 3 }, new Person { Id = 2, Name = "Sylvia", LastName = "Gahan", Mor = 0, Far = 0 }, new Person { Id = 3, Name = "Len", LastName = "Gahan", Mor = 0, Far = 0 }, new Person { Id = 4, Name = "Sue", LastName = "Gahan", Mor = 2, Far = 3 }, new Person { Id = 5, Name = "Peter", LastName = "Gahan", Mor = 2, Far = 7 }, new Person { Id = 6, Name = "Phil", LastName = "Gahan", Mor = 2, Far = 7 }, new Person { Id = 7, Name = "Jack", LastName = "Gahan", Mor = 0, Far = 0 }, new Person { Id = 8, Name = "Jack", LastName = "Gahan", Mor = 9, Far = 1 }, new Person { Id = 9, Name = "Joanne", LastName = "Fox", Mor = 0, Far = 0 }, new Person { Id = 10, Name = "Stella Rose", LastName = "Gahan", Mor = 11, Far = 1 }, new Person { Id = 11, Name = "Jennifer", LastName = "Sklias-Gahan", Mor = 12, Far = 0 }, new Person { Id = 12, Name = "Stella", LastName = "Sklias", Mor = 0, Far = 0 }, new Person { Id = 13, Name = "Jimmy", LastName = "Rogers-Gahan", Mor = 11, Far = 0 });
+
+
+
+            // modelBuilder.Seed();
         }
 
     }
@@ -73,45 +78,11 @@ namespace InlamningsuppgiftEntity
             Console.WriteLine("Hello World!");
             Console.WriteLine("Nu skapar vi en databas!");
 
-            //CreateMyDatabase();
+            // Create person:
+            // r
+            // u
+            // d
+
         }
-
-        #region trams
-        private static void CreateMyDatabase()
-        {
-            string str;
-            SqlConnection myConn = new SqlConnection($@"Server=(localdb)\mssqllocaldb;Database={DatabaseName};Trusted_Connection=True");
-
-            str = "CREATE DATABASE MyDatabase ON PRIMARY " +
- "(NAME = MyDatabase_Data, " +
- "FILENAME = 'C:\\MyDatabaseData.mdf', " +
- "SIZE = 2MB, MAXSIZE = 10MB, FILEGROWTH = 10%)" +
- "LOG ON (NAME = MyDatabase_Log, " +
- "FILENAME = 'C:\\MyDatabaseLog.ldf', " +
- "SIZE = 1MB, " +
- "MAXSIZE = 5MB, " +
- "FILEGROWTH = 10%)";
-
-            SqlCommand myCommand = new SqlCommand(str, myConn);
-
-            try
-            {
-                myConn.Open();
-                myCommand.ExecuteNonQuery();
-                Console.WriteLine("Databas skapad");
-            }
-            catch (System.Exception ex)
-            {
-                Console.WriteLine("något gick fel: " + ex.ToString());
-            }
-            finally
-            {
-                if (myConn.State == ConnectionState.Open)
-                {
-                    myConn.Close();
-                }
-            }
-        }
-        #endregion
     }
 }
