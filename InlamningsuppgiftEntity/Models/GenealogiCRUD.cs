@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace InlamningsuppgiftEntity
 {
     public class GenealogiCRUD
     {
         [Key] // Måste finnas en key?
-        public string DatabaseName { get; set; } = "CGGenealogi";
+        //public string DatabaseName { get; set; } = "CGGenealogi";
         public int MaxRows { get; set; } = 10; // Max rows to return when searching
         public string OrderBy { get; set; } = "lastName";
         public void Create(Person person) { /* Massor med kod */ }
@@ -18,5 +20,19 @@ namespace InlamningsuppgiftEntity
         //public List<Person> List(string filter = "firstName", string paramValue) { /* Massor med kod */ }
         //public Person Read(string name) { /* Massor med kod */ }
         public void Update(Person person) { /* Massor med kod */ }
+
+        public void ReadAll(string name) 
+        {
+            Console.WriteLine("Lista alla personer (förnamn):");
+            using (var context = new Database.GenealogiContext())
+            {
+                var allPeopleInDatabase = context.MyPeople.ToList();
+                Console.WriteLine("varsågo:");
+                foreach (var item in allPeopleInDatabase)
+                {
+                    Console.WriteLine(item.Name);
+                }
+            }
+        }
     }
 }
