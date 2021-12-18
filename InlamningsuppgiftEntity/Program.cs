@@ -51,6 +51,23 @@ namespace InlamningsuppgiftEntity
         {
             // Main-klassen ska bara instantiera och starta familjeträdet, inget annat.
             GenealogiCRUD myTree = new GenealogiCRUD();
+
+
+
+
+
+            // Detta funkar:
+            //Console.WriteLine("Lista alla personer (förnamn):");
+            //using (var context = new Database.GenealogiContext())
+            //{
+            //    var allPeopleInDatabase = context.MyPeople.ToList();
+            //    Console.WriteLine("varsågo:");
+            //    foreach (var item in allPeopleInDatabase)
+            //    {
+            //        Console.WriteLine(item.Name);
+            //    }
+            //}
+
         }
     }
 }

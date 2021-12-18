@@ -21,18 +21,13 @@ namespace InlamningsuppgiftEntity
         //public Person Read(string name) { /* Massor med kod */ }
         public void Update(Person person) { /* Massor med kod */ }
 
+
+
+
+
         public void ReadAll(string name) 
         {
-            Console.WriteLine("Lista alla personer (förnamn):");
-            using (var context = new Database.GenealogiContext())
-            {
-                var allPeopleInDatabase = context.MyPeople.ToList();
-                Console.WriteLine("varsågo:");
-                foreach (var item in allPeopleInDatabase)
-                {
-                    Console.WriteLine(item.Name);
-                }
-            }
+            
         }
     }
 }
