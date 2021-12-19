@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore; // För att kunna använda DbContext
+﻿using InlamningsuppgiftEntity.Database;
+
+using InlamningsuppgiftEntity.Models; // För att kunna använda Menuklassen?
+
+using Microsoft.EntityFrameworkCore; // För att kunna använda DbContext
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
 
 namespace InlamningsuppgiftEntity
 {
@@ -52,21 +52,48 @@ namespace InlamningsuppgiftEntity
             // Main-klassen ska bara instantiera och starta familjeträdet, inget annat.
             GenealogiCRUD myTree = new GenealogiCRUD();
 
+            Menu m = new Menu();
+            m.MenuShow(myTree);
 
 
 
+            // Gammalt med icke-OOP-meny:
+            //Menu(myTree);
 
-            // Detta funkar:
-            //Console.WriteLine("Lista alla personer (förnamn):");
-            //using (var context = new Database.GenealogiContext())
+            //private static void Menu(GenealogiCRUD myTree)
             //{
-            //    var allPeopleInDatabase = context.MyPeople.ToList();
-            //    Console.WriteLine("varsågo:");
-            //    foreach (var item in allPeopleInDatabase)
-            //    {
-            //        Console.WriteLine(item.Name);
+            //Console.WriteLine("Välj vad du vill göra!");
+            //Console.WriteLine("1. Se alla personer från listan.");
+            //Console.WriteLine("2. Lägga till person.");
+            //Console.WriteLine("3. Söka efter person enligt förnamn. ");
+            //Console.WriteLine("Q. Avsluta");
+
+            //string input = Console.ReadLine().Trim().ToLower();
+            //switch (input)
+            //{
+            //    case "1":
+            //        myTree.ReadAll();
+            //        break;
+            //    case "2":
+            //        myTree.AddPerson();
+            //        break;
+            //    case "3":
+            //        myTree.SearchForPersonByFirstName();
+            //        break;
+            //    case "q":
+            //        Console.WriteLine("Hejdå, programmet avslutas.");
+            //        break;
+            //    default:
+            //        Console.WriteLine("Ogiltig val.");
+            //        break;
             //    }
             //}
+
+
+
+
+            myTree.SearchForPersonByFirstName();
+            myTree.AddPerson();
 
         }
     }
