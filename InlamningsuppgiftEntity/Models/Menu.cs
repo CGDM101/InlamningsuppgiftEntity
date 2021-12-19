@@ -14,7 +14,12 @@ namespace InlamningsuppgiftEntity.Models
             Console.WriteLine("Välj vad du vill göra!");
             Console.WriteLine("1. Se alla personer från listan.");
             Console.WriteLine("2. Lägga till person.");
-            Console.WriteLine("3. Söka efter person enligt förnamn. ");
+            Console.WriteLine("3. Söka efter person enligt förnamn. "); // + andra saker
+            Console.WriteLine("4. Visa mor- och farföräldrar för en person. ");
+            Console.WriteLine("5. Visa lista på någons barn. ");
+            Console.WriteLine("6. Ändra på person. ");
+            Console.WriteLine("7. Visa persons mor. ");
+            Console.WriteLine("8. Visa persons far. ");
             Console.WriteLine("Q. Avsluta");
 
             string input = Console.ReadLine().Trim().ToLower();
@@ -29,6 +34,21 @@ namespace InlamningsuppgiftEntity.Models
                 case "3":
                     myTree.SearchForPersonByFirstName();
                     break;
+                case "4":
+                    myTree.ShowGrandParents();
+                    break;
+                case "5":
+                    myTree.ShowChildrenOfPerson();
+                    break;
+                case "6":
+                    myTree.UpdatePerson();
+                    break;
+                case "7":
+                    myTree.FindMotherOfPerson();
+                    break;
+                case "8":
+                    myTree.FindFatherOfPerson();
+                    break;
                 case "q":
                     Console.WriteLine("Hejdå, programmet avslutas.");
                     break;
@@ -37,8 +57,6 @@ namespace InlamningsuppgiftEntity.Models
                     break;
 
             }
-
-
         }
     }
 }

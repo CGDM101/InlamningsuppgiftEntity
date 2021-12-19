@@ -88,13 +88,6 @@ namespace InlamningsuppgiftEntity
             //        break;
             //    }
             //}
-
-
-
-
-            myTree.SearchForPersonByFirstName();
-            myTree.AddPerson();
-
         }
     }
 }

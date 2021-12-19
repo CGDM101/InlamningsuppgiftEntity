@@ -29,7 +29,22 @@ namespace InlamningsuppgiftEntity.Database
 
 
 
-        public void ReadAll()
+        internal void ShowGrandParents()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void ShowChildrenOfPerson()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void UpdatePerson()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ReadAll() // Fungerar.
         {
             using (var context = new Database.GenealogiContext())
             {
@@ -40,6 +55,16 @@ namespace InlamningsuppgiftEntity.Database
                     Console.WriteLine(item.Name);
                 }
             }
+        }
+
+        internal void FindFatherOfPerson()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void FindMotherOfPerson()
+        {
+            throw new NotImplementedException();
         }
 
         public void AddPerson()
@@ -72,11 +97,10 @@ namespace InlamningsuppgiftEntity.Database
                     
                 }
             }
-
             //Console.WriteLine("Person är tillagd."); // Nope, stämmer inte.
         }
 
-        public void SearchForPersonByFirstName() 
+        public void SearchForPersonByFirstName() // efternamn, id, mor, etc
         {
             Console.Write("Förnamn på den du vill söka efter: ");
             string input = Console.ReadLine().Trim().ToLower();
@@ -108,8 +132,5 @@ namespace InlamningsuppgiftEntity.Database
                 
             }
         }
-
-
-
     }
 }
