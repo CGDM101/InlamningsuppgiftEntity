@@ -20,6 +20,7 @@ namespace InlamningsuppgiftEntity.Models
             Console.WriteLine("6. Ändra på person. ");
             Console.WriteLine("7. Visa persons mor. ");
             Console.WriteLine("8. Visa persons far. ");
+            Console.WriteLine("9. Radera person från databas.");
             Console.WriteLine("Q. Avsluta");
 
             string input = Console.ReadLine().Trim().ToLower();
@@ -48,6 +49,9 @@ namespace InlamningsuppgiftEntity.Models
                     break;
                 case "8":
                     myTree.FindFatherOfPerson();
+                    break;
+                case "9":
+                    myTree.RemovePerson();
                     break;
                 case "q":
                     Console.WriteLine("Hejdå, programmet avslutas.");

@@ -57,6 +57,8 @@ namespace InlamningsuppgiftEntity.Database
             }
         }
 
+        internal void RemovePerson() { throw new NotImplementedException(); }
+
         internal void FindFatherOfPerson()
         {
             throw new NotImplementedException();
