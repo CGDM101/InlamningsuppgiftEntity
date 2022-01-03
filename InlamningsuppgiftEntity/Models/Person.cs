@@ -10,5 +10,6 @@ namespace InlamningsuppgiftEntity
         public string LastName { get; set; }
         public int Mor { get; set; }
         public int Far { get; set; }
+        public int BirthYear { get; set; }
     }
 }

@@ -3,14 +3,16 @@ using InlamningsuppgiftEntity.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InlamningsuppgiftEntity.Migrations
 {
     [DbContext(typeof(GenealogiContext))]
-    partial class GenealogiContextModelSnapshot : ModelSnapshot
+    [Migration("20220103171427_added_another_birthyeear_1962")]
+    partial class added_another_birthyeear_1962
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

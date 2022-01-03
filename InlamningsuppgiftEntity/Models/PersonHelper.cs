@@ -46,9 +46,9 @@ namespace InlamningsuppgiftEntity.Models
             return firstNamePerson;
 
         }
-        public Person FindPersonOverloaded(string lastName) { }
-        public Person FindPersonOverloaded(int id) { }
-        public Person FindPersonOverloaded(string motherId§123) { }
-        public Person FindPersonOverloaded(string fatherId) { }
+        //public Person FindPersonOverloaded(string lastName) { }
+        //public Person FindPersonOverloaded(int id) { }
+        //public Person FindPersonOverloaded(string motherId) { }
+        //public Person FindPersonOverloaded(string fatherId) { }
     }
 }
