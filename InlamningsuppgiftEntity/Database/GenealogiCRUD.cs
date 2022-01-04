@@ -30,6 +30,9 @@ namespace InlamningsuppgiftEntity.Database
         //public Person Read(string name) { /* Massor med kod */ }
         public void Update(Person person) { /* Massor med kod */ }
 
+
+
+
         internal void SearchPersonByBirthYear()
         {
             Console.Write("Födelseår du vill hitta folk från: ");
@@ -121,7 +124,12 @@ namespace InlamningsuppgiftEntity.Database
             }
         }
 
-        internal void UpdatePerson() { throw new NotImplementedException(); }
+        internal void UpdatePerson() // WIP
+        {
+            ReadAll();
+            Console.Write("Vem av dessa vill du ändra på? ");
+            int input = int.Parse(Console.ReadLine());
+        }
 
         public void ReadAll()
         {
@@ -136,12 +144,12 @@ namespace InlamningsuppgiftEntity.Database
                     counter++;
                     Console.WriteLine(counter + ". " + item.Name + " " + item.LastName);
                 }
-            }            
+            }
         }
 
         public void AddPerson()
         {
-            Console.Write("Id på den du vill lägga till: ");
+            Console.Write("Id på den du vill lägga till: "); // TODO kontrollera att den inte finns
             int inputId = int.Parse(Console.ReadLine());
             Console.Write("Förnamn på den du vill lägga till: ");
             string inputName = Console.ReadLine().Trim();
@@ -166,7 +174,6 @@ namespace InlamningsuppgiftEntity.Database
                 {
                     Console.WriteLine("Det funkade inte att lägga till personen... Felmeddelandet säger:");
                     Console.WriteLine(e.Message);
-                    
                 }
             }
             
@@ -207,7 +214,32 @@ namespace InlamningsuppgiftEntity.Database
             }
         }
         
-        internal void RemovePerson() { throw new NotImplementedException(); }
+        internal void RemovePerson() // WIP
+        {
+            ReadAll();
+            Console.Write("Vem av dessa vill du ta bort från databasen? ");
+            int input = int.Parse(Console.ReadLine());
+            using (var context = new GenealogiContext())
+            {
+                IQueryable<Person> personToBeDeleted = context.MyPeople.Where(x => x.Id == input); // var
+                foreach (var item in personToBeDeleted)
+                {
+                    Console.WriteLine("Ok, vi tar bort " + item.Name + " " + item.LastName);
+                    try
+                    {
+                        context.Remove(personToBeDeleted); // FUNKAR INTE.
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Något gick fel, så här säger meddelandet: ");
+                        Console.WriteLine(e);
+                    }
+                    
+                    Console.WriteLine("Så här ser listan ut nu:"); // Personen har ej tagits bort.
+                    ReadAll();
+                }
+            }
+        }
 
         internal void FindFatherOfPerson()
         {
