@@ -14,6 +14,7 @@ namespace InlamningsuppgiftEntity.Models
             string input = "";
             while (input != "q") // Programmet fortsätter tills de trycker q.
             {
+                Console.WriteLine();
                 Console.WriteLine("Välj vad du vill göra!");
                 Console.WriteLine("1. Se alla personer från listan."); // FUNKAR.
                 Console.WriteLine("2. Lägga till person."); // FUNKAR INTE se felmedd!
@@ -30,6 +31,13 @@ namespace InlamningsuppgiftEntity.Models
                 input = Console.ReadLine().Trim().ToLower();
                 switch (input)
                 {
+                    case "test":
+                        Console.WriteLine("vem:");
+                        string answer = Console.ReadLine();
+                        Person p = new Person();
+                        myTree.GetFather(p);
+                        break;
+
                     case "1":
                         myTree.ReadAll();
                         break;
@@ -52,10 +60,10 @@ namespace InlamningsuppgiftEntity.Models
                         myTree.UpdatePerson();
                         break;
                     case "8":
-                        myTree.FindMotherOfPerson();
+                        myTree.FindMotherOfPerson(); // ej korr okänd mor
                         break;
                     case "9":
-                        myTree.FindFatherOfPerson();
+                        myTree.FindFatherOfPerson(); // ej korrekt för folk med okänd far.
                         break;
                     case "10":
                         myTree.RemovePerson();

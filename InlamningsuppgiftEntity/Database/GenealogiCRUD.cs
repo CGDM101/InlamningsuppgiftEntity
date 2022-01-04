@@ -19,20 +19,51 @@ namespace InlamningsuppgiftEntity.Database
         public void Delete(Person person) { /* Massor med kod */ }
         public void DoesPersonExist(string name) { /* Massor med kod */ }
         public void DoesPersonExist(int Id) { /* Massor med kod */ }
-        public void GetFather(Person person) { /* Massor med kod */ }
+        public void GetFather(Person person) 
+        {
+            Person personToFindFatherFrom = new Person(); // p från menu
+        
+            /* Massor med kod */
+        }
         public void GetMother(Person person) { /* Massor med kod */ }
         //public List<Person> List(string filter = "firstName", string paramValue) { /* Massor med kod */ }
         //public Person Read(string name) { /* Massor med kod */ }
         public void Update(Person person) { /* Massor med kod */ }
 
-
-
-
-
-        internal void ShowGrandParents()
+        internal void SearchPersonByBirthYear()
         {
-            throw new NotImplementedException();
+            Console.Write("Födelseår du vill hitta folk från: ");
+            int input = int.Parse(Console.ReadLine().Trim());
+            using (var context = new GenealogiContext())
+            {
+                var all = context.MyPeople.ToList();
+                var find = context.MyPeople.Where(x => x.BirthYear == input);
+                if (find == null) // Alternativ till try catch som inte fungerar...?!
+                {
+                    Console.WriteLine("Fanns ingen född det året.");
+                }
+                else
+                {
+                    Console.WriteLine("Denna/dessa personer är födda " + input);
+                    foreach (var item in find)
+                    {
+                        Console.WriteLine(item.Name + " " + item.LastName);
+                    }
+                }
+                //try
+                //{
+                //    Console.WriteLine(find.Name + " " + find.LastName);
+
+                //}
+                //catch (NullReferenceException e)
+                //{
+                //    Console.WriteLine("Fanns ingen född det året.");
+                //    Console.WriteLine("Felmeddelandet säger: " + e);
+                //}
+            }
         }
+
+        internal void ShowGrandParents() { throw new NotImplementedException(); }
 
         internal void ShowChildrenOfPerson()
         {
@@ -90,57 +121,23 @@ namespace InlamningsuppgiftEntity.Database
             }
         }
 
-        internal void UpdatePerson()
-        {
-            throw new NotImplementedException();
-        }
+        internal void UpdatePerson() { throw new NotImplementedException(); }
 
-        public void ReadAll() // Fungerar.
+        public void ReadAll()
         {
             using (var context = new GenealogiContext())
             {
                 var allPeopleInDatabase = context.MyPeople.ToList();
+                Console.WriteLine();
                 Console.WriteLine("Här är alla personer i databasen:");
+                int counter = 0;
                 foreach (var item in allPeopleInDatabase)
                 {
-                    Console.WriteLine(item.Name + " " + item.LastName);
+                    counter++;
+                    Console.WriteLine(counter + ". " + item.Name + " " + item.LastName);
                 }
             }            
         }
-
-        internal void SearchPersonByBirthYear() // Fungerar.
-        {
-            Console.Write("Födelseår du vill hitta folk från: ");
-            int input = int.Parse(Console.ReadLine().Trim());
-            using (var context = new GenealogiContext())
-            {
-                var all = context.MyPeople.ToList();
-                var find = context.MyPeople.Where(x => x.BirthYear == input);
-                if (find == null) // Alternativ till try catch som inte fungerar...?!
-                {
-                    Console.WriteLine("Fanns ingen född det året.");
-                }
-                else
-                {
-                    Console.WriteLine("Denna/dessa personer är födda " + input);
-                    foreach (var item in find)
-                    {
-                        Console.WriteLine(item.Name + " " + item.LastName);
-                    }
-                }
-                //try
-                //{
-                //    Console.WriteLine(find.Name + " " + find.LastName);
-
-                //}
-                //catch (NullReferenceException e)
-                //{
-                //    Console.WriteLine("Fanns ingen född det året.");
-                //    Console.WriteLine("Felmeddelandet säger: " + e);
-                //}
-            }
-        }
-
 
         public void AddPerson()
         {
@@ -214,12 +211,259 @@ namespace InlamningsuppgiftEntity.Database
 
         internal void FindFatherOfPerson()
         {
-            throw new NotImplementedException();
+            ReadAll();
+            Console.Write("Vems person vill du hitta fadern till? ");
+            int input = 0;
+            try
+            {
+                input = int.Parse(Console.ReadLine().Trim());
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Välj en siffra!");
+            }
+
+            using (var context = new GenealogiContext())
+            {
+                switch (input)
+                {
+                    case 1: // dave
+                        var find = context.MyPeople.Where(x => x.Far == 3);
+                        Console.WriteLine("Person/-er med denna far är:");
+                        foreach (var item in find)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 2: // sylvia
+                        var find2 = context.MyPeople.Where(x => x.Far == 0);
+                        Console.WriteLine("Person/-er med denna far är:");
+                        foreach (var item in find2)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 3: // len
+                        var find3 = context.MyPeople.Where(x => x.Far == 0);
+                        Console.WriteLine("Person/-er med denna far är:");
+                        foreach (var item in find3)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 4: // sue
+                        var find4 = context.MyPeople.Where(x => x.Far == 3);
+                        Console.WriteLine("Person/-er med denna far är:");
+                        foreach (var item in find4)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 5: // peter
+                        var find5 = context.MyPeople.Where(x => x.Far == 7);
+                        Console.WriteLine("Person/-er med denna far är:");
+                        foreach (var item in find5)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 6: // phil
+                        var find6 = context.MyPeople.Where(x => x.Far == 7);
+                        Console.WriteLine("Person/-er med denna far är:");
+                        foreach (var item in find6)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 7: //jack far
+                        var find7 = context.MyPeople.Where(x => x.Far == 0);
+                        Console.WriteLine("Person/-er med denna far är:");
+                        foreach (var item in find7)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 8: // jack son
+                        var find8 = context.MyPeople.Where(x => x.Far == 1);
+                        Console.WriteLine("Person/-er med denna far är:");
+                        foreach (var item in find8)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 9: // joanne
+                        var find9 = context.MyPeople.Where(x => x.Far == 0);
+                        Console.WriteLine("Person/-er med denna far är:");
+                        foreach (var item in find9)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 10: //stella rose
+                        var find10 = context.MyPeople.Where(x => x.Far == 1);
+                        Console.WriteLine("Person/-er med denna far är:");
+                        foreach (var item in find10)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 11: // jennifer
+                        var find11 = context.MyPeople.Where(x => x.Far == 0);
+                        Console.WriteLine("Person/-er med denna far är:");
+                        foreach (var item in find11)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 12: // stella mor
+                        var find12 = context.MyPeople.Where(x => x.Far == 0);
+                        Console.WriteLine("Person/-er med denna far är:");
+                        foreach (var item in find12)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 13: // jimmy
+                        var find13 = context.MyPeople.Where(x => x.Far == 1);
+                        Console.WriteLine("Person/-er med denna far är:");
+                        foreach (var item in find13)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         internal void FindMotherOfPerson()
         {
-            throw new NotImplementedException();
+            ReadAll();
+            Console.Write("Vems person vill du hitta modern till? ");
+            int input = 0;
+            try
+            {
+                input = int.Parse(Console.ReadLine().Trim());
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Välj en siffra!");
+            }
+
+            using (var context = new GenealogiContext())
+            {
+                switch (input)
+                {
+                    case 1: // dave
+                        var find = context.MyPeople.Where(x => x.Mor == 2);
+                        Console.WriteLine("Person/-er med denna mor är:");
+                        foreach (var item in find)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 2: // sylvia
+                        var find2 = context.MyPeople.Where(x => x.Mor == 0);
+                        Console.WriteLine("Person/-er med denna mor är:");
+                        foreach (var item in find2)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 3: // len
+                        var find3 = context.MyPeople.Where(x => x.Mor == 0);
+                        Console.WriteLine("Person/-er med denna mor är:");
+                        foreach (var item in find3)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 4: // sue
+                        var find4 = context.MyPeople.Where(x => x.Mor == 2);
+                        Console.WriteLine("Person/-er med denna mor är:");
+                        foreach (var item in find4)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 5: // peter
+                        var find5 = context.MyPeople.Where(x => x.Mor == 2);
+                        Console.WriteLine("Person/-er med denna mor är:");
+                        foreach (var item in find5)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 6: // phil
+                        var find6 = context.MyPeople.Where(x => x.Mor == 2);
+                        Console.WriteLine("Person/-er med denna mor är:");
+                        foreach (var item in find6)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 7: //jack far
+                        var find7 = context.MyPeople.Where(x => x.Mor == 0);
+                        Console.WriteLine("Person/-er med denna mor är:");
+                        foreach (var item in find7)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 8: // jack son
+                        var find8 = context.MyPeople.Where(x => x.Mor == 9);
+                        Console.WriteLine("Person/-er med denna mor är:");
+                        foreach (var item in find8)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 9: // joanne
+                        var find9 = context.MyPeople.Where(x => x.Mor == 0);
+                        Console.WriteLine("Person/-er med denna mor är:");
+                        foreach (var item in find9)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 10: //stella rose
+                        var find10 = context.MyPeople.Where(x => x.Mor == 11);
+                        Console.WriteLine("Person/-er med denna mor är:");
+                        foreach (var item in find10)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 11: // jennifer
+                        var find11 = context.MyPeople.Where(x => x.Mor == 12);
+                        Console.WriteLine("Person/-er med denna mor är:");
+                        foreach (var item in find11)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 12: // stella mor
+                        var find12 = context.MyPeople.Where(x => x.Mor == 11);
+                        Console.WriteLine("Person/-er med denna mor är:");
+                        foreach (var item in find12)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    case 13: // jimmy
+                        var find13 = context.MyPeople.Where(x => x.Mor == 11);
+                        Console.WriteLine("Person/-er med denna mor är:");
+                        foreach (var item in find13)
+                        {
+                            Console.WriteLine(item.Name + " " + item.LastName);
+                        }
+                        break;
+                    //default:
+                    //    Console.WriteLine("När kommer detta upp?");
+                    //    break;
+                }
+            }
         }
     }
 }
