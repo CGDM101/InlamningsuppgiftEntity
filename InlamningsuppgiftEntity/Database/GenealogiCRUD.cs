@@ -129,6 +129,72 @@ namespace InlamningsuppgiftEntity.Database
             ReadAll();
             Console.Write("Vem av dessa vill du ändra på? ");
             int input = int.Parse(Console.ReadLine());
+            using (var context = new GenealogiContext())
+            {
+                var personToChange = context.MyPeople.Where(x => x.Id == input);
+                Console.WriteLine("Vilken egenskap vill du ändra på?");
+                foreach (var item in personToChange)
+                {
+                    Console.WriteLine("1. Förnamn (" + item.Name + ")");
+                    Console.WriteLine("2. Efternamn (" + item.LastName + ")");
+                    Console.WriteLine("3. Födelseår (" + item.BirthYear + ")");
+                    Console.WriteLine("4. Mor (" + item.Mor + ")");
+                    Console.WriteLine("5. Far (" + item.Far + ")");
+
+                    int input2 = int.Parse(Console.ReadLine().Trim());
+                    switch (input2)
+                    {
+                        case 1:
+                            Console.Write("Vilket förnamn ska den ha istället? ");
+                            string newName = Console.ReadLine().Trim();
+                            item.Name = newName;
+                            break;
+                        case 2:
+                            Console.Write("Vilket efternamn ska den ha istället? ");
+                            string newLastName = Console.ReadLine().Trim();
+                            item.LastName = newLastName;
+                            break;
+                        case 3:
+                            Console.Write("Vilket födelseår ska den ha istället? ");
+                            string newBirthYear = Console.ReadLine().Trim();
+                            item.BirthYear = int.Parse(newBirthYear);
+                            break;
+                        case 4:
+                            Console.Write("Vilken mor ska den ha istället? Välj nummer i listan ovan: ");
+                            string newMotherId = Console.ReadLine().Trim();
+                            item.Mor = int.Parse(newMotherId);
+                            break;
+                        case 5:
+                            Console.Write("Vilken far ska den ha istället? Välj nummer i listan ovan: ");
+                            string newFatherId = Console.ReadLine().Trim();
+                            item.Far = int.Parse(newFatherId);
+                            break;
+
+                        default:
+                            Console.WriteLine("nåt gick fel");
+                            break;
+                    }
+
+                    try
+                    {
+                        context.SaveChanges(); // kraschar
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("felmeddelandet säger: " + e);
+                    }
+
+
+                    var find = context.MyPeople.Where(x => x.Id == input);
+                    Console.WriteLine("Här är personens nya egenskaper:"); // Här har det uppdaterats dock!
+                    Console.WriteLine(item.Id); // samma som förut
+                    Console.WriteLine(item.Name);
+                    Console.WriteLine(item.LastName);
+                    Console.WriteLine(item.BirthYear);
+                    Console.WriteLine(item.Mor);
+                    Console.WriteLine(item.Far);
+                }
+            }
         }
 
         public void ReadAll()
