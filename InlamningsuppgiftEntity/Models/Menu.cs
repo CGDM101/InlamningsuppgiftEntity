@@ -16,28 +16,22 @@ namespace InlamningsuppgiftEntity.Models
             {
                 Console.WriteLine();
                 Console.WriteLine("Välj vad du vill göra!");
-                Console.WriteLine("1. Se alla personer från listan."); // FUNKAR.
-                Console.WriteLine("2. Lägga till person."); // FUNKAR INTE se felmedd!
-                Console.WriteLine("3. Söka efter person som börjar på viss bokstav. "); // FUNKAR delvis, fixa null-grejen.
-                Console.WriteLine("4. Söka efter person född visst år. "); // FUNKAR.
+                Console.WriteLine("1. Se alla personer från listan.");
+                Console.WriteLine("2. Lägga till person.");
+                Console.WriteLine("3. Söka efter person som börjar på viss bokstav. ");
+                Console.WriteLine("4. Söka efter person född visst år. ");
                 Console.WriteLine("5. Visa mor- och farföräldrar för en person. ");
-                Console.WriteLine("6. Visa lista på någons barn. "); // FUNKAR delvis, utom Jennifer. 
+                Console.WriteLine("6. Visa lista på någons barn. ");
                 Console.WriteLine("7. Ändra på person. ");
-                Console.WriteLine("8. Visa persons mor. "); // söka först om den finns, annars skapa.
-                Console.WriteLine("9. Visa persons far. "); // söka först
+                Console.WriteLine("8. Visa persons mor. ");
+                Console.WriteLine("9. Visa persons far. ");
                 Console.WriteLine("10. Radera person från databas.");
+                Console.WriteLine("11. Visa någons barn.");
                 Console.WriteLine("Q. Avsluta");
 
                 input = Console.ReadLine().Trim().ToLower();
                 switch (input)
                 {
-                    case "test":
-                        Console.WriteLine("vem:");
-                        string answer = Console.ReadLine();
-                        Person p = new Person();
-                        myTree.GetFather(p);
-                        break;
-
                     case "1":
                         myTree.ReadAll();
                         break;
@@ -60,13 +54,16 @@ namespace InlamningsuppgiftEntity.Models
                         myTree.UpdatePerson();
                         break;
                     case "8":
-                        myTree.FindMotherOfPerson(); // ej korr okänd mor
+                        myTree.FindMotherOfPerson();
                         break;
                     case "9":
-                        myTree.FindFatherOfPerson(); // ej korrekt för folk med okänd far.
+                        myTree.FindFatherOfPerson();
                         break;
                     case "10":
                         myTree.RemovePerson();
+                        break;
+                    case "11":
+                        myTree.ShowChildrenOfPerson();
                         break;
                     case "q":
                         Console.WriteLine("Hejdå, programmet avslutas.");
@@ -74,7 +71,6 @@ namespace InlamningsuppgiftEntity.Models
                     default:
                         Console.WriteLine("Ogiltigt val.");
                         break;
-
                 }
             }
         }

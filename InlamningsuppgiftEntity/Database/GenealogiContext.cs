@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,11 @@ using System.Threading.Tasks;
 namespace InlamningsuppgiftEntity.Database
 {
     /// <summary>
-    /// DbContext för detta projekt
+    /// DbContext för detta projekt.
     /// </summary>
     public class GenealogiContext : DbContext
     {
-        private const string DatabaseName = "CGGenealogi"; // står i klassen?
+        private const string DatabaseName = "CGGenealogi";
         public DbSet<GenealogiCRUD> MyRelatives { get; set; }
         public DbSet<Person> MyPeople { get; set; }
 
@@ -38,16 +39,6 @@ namespace InlamningsuppgiftEntity.Database
             new Person { Id = 11, Name = "Jennifer", LastName = "Sklias-Gahan", Mor = 12, Far = 0, BirthYear = 1962 },
             new Person { Id = 12, Name = "Stella", LastName = "Sklias", Mor = 0, Far = 0 }, 
             new Person { Id = 13, Name = "Jimmy", LastName = "Rogers-Gahan", Mor = 11, Far = 0 });
-
-
-            // ?
-            List<Person> listOfAllPersons = new List<Person>();
-            // lägg till dem
-
-
-      
-            // modelBuilder.Seed();
-
         }
     }
 }
